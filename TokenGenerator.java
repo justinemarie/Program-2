@@ -12,16 +12,23 @@ package github;
 import java.util.*;
 public class TokenGenerator {
     
-    private ArrayList<String> tokens = new ArrayList<String>(); 
+    private ArrayList<String> tokens = new ArrayList<String>();  
     
-    public TokenGenerator(int size, String text)
+    public TokenGenerator(int size, ArrayList<String> rules)
     {
-        for(int i=0; i+size<=text.length(); i++)
-            tokens.add(text.substring(i, i+size-1)); 
+        for(int i=0; i<rules.size(); i++) 
+        {
+            for(int j=0; j<=rules.get(i).length()-size; j++) //sliding window, moves by 1 each time  
+            {
+                tokens.add(rules.get(i).substring(j, j+size)); //size 
+            }
+        }
     }
     
     public ArrayList<String> getTokens()
     {
+        for(String x : tokens)
+            System.out.println(x);
         return tokens; 
     }
 }
